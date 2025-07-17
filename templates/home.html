@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Social - Fake Profile Detector</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #dbeafe, #e0f2fe);
+            color: #1f2937;
+            background-image: url('static/home.jpg');
+        }
+
+        nav {
+            background-color: violet;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            height: 60px;
+        }
+
+        .nav-left {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .nav-right a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 14px 16px;
+            transition: background 0.3s ease;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .nav-right a:hover {
+            background-color: skyblue;
+        }
+
+        .section {
+            display: none;
+            padding: 60px 100px;
+            animation: fadeIn 0.6s ease;
+            min-height: 80vh;
+            box-sizing: border-box;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            max-width: 50%;
+        }
+
+        .hero-text h1 {
+            font-size: 64px;
+            font-weight: 800;
+            margin: 0;
+        }
+
+        .hero-text p {
+            font-size: 24px;
+            margin-top: 10px;
+            color: white;
+        }
+
+        .hero-text button {
+            margin-top: 30px;
+            padding: 14px 28px;
+            background-color: #111827;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: background-color 0.3s;
+        }
+
+        .hero-text button:hover {
+            background-color: #2563eb;
+        }
+
+        .hero-image img {
+            width: 550px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media screen and (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text, .hero-image {
+                max-width: 100%;
+            }
+
+            .hero-image img {
+                width: 90%;
+                margin-top: 30px;
+            }
+
+            .section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-left">Secure Social</div>
+    <div class="nav-right">
+        <a onclick="showSection('home')">Home</a>
+        <a onclick="showSection('about')">About</a>
+
+        <a onclick="showSection('whyus')">Why Us</a>
+        <a href="{{ url_for('login') }}">Login/Register</a>
+    </div>
+</nav>
+
+<!-- Sections -->
+<div id="home" class="section active">
+    <div class="hero">
+        <div class="hero-text">
+            <h1>Secure Social</h1>
+            <p>Fake Profile Detector</p>
+        
+        </div>
+        <div class="hero-image">
+          <!--  <img src="{{ url_for('static', filename='shield-image.png') }}" alt="Security AI Image">-->
+        </div>
+    </div>
+</div>
+
+<div id="about" class="section">
+    <h1 style="color: white;">About Secure Social</h1>
+    <p style="color: white;" >
+        Secure Social is a cutting-edge platform designed to detect and prevent fake social media accounts.
+        Using machine learning and behavior analytics, we analyze account features like follower ratios,
+        activity patterns, and verified status to identify suspicious or bot-like profiles.
+        <br><br>
+        Our mission is to make online communities safer, more transparent, and free from fake engagement.
+    </p>
+</div>
+
+
+<div id="whyus" class="section">
+    <h1 style="color: white;">Why Choose Us?</h1>
+    <p style="color: white;">
+        🔐 <strong>Advanced Machine Learning:</strong> Our models are trained with real-world data for high accuracy.<br>
+        ⚡ <strong>Real-time Prediction:</strong> Instant results based on profile statistics and signals.<br>
+        👥 <strong>User-Centric Design:</strong> Simple, intuitive UI to ensure smooth experience.<br>
+        🌍 <strong>Trusted by Developers:</strong> Integrate Secure Social into platforms for added safety.
+    </p>
+</div>
+
+<script>
+    function showSection(id) {
+        document.querySelectorAll('.section').forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(id).classList.add('active');
+    }
+</script>
+
+</body>
+</html>

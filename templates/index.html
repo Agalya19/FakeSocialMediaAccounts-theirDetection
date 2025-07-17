@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Account Detector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        async function checkFakeAccount() {
+            let data = {
+                username: document.getElementById("username").value,
+                followers: document.getElementById("followers").value,
+                following: document.getElementById("following").value,
+                posts: document.getElementById("posts").value,
+                verified: document.getElementById("verified").checked ? 1 : 0
+            };
+
+            let response = await fetch("/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            let result = await response.json();
+            document.getElementById("result").innerText = "Prediction for " + data.username + ": " + result.prediction;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Fake Account Detector</h2>
+        <label>Username: </label><input type="text" id="username" required><br>
+        <label>Followers: </label><input type="number" id="followers"><br>
+        <label>Following: </label><input type="number" id="following"><br>
+        <label>Posts: </label><input type="number" id="posts"><br>
+        <label>Verified: </label><input type="checkbox" id="verified"><br>
+        <button type="button" onclick="checkFakeAccount()">Check</button>
+        <p id="result"></p>
+    </div>
+
+    <!-- Profile Dropdown -->
+    <div class="profile-container">
+        <div class="profile-dropdown">
+            <div class="profile-name">👤 {{ username }}</div>
+            <div class="dropdown-content">
+                <p>Welcome, {{ username }}!</p>
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
